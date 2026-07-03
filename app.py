@@ -37,6 +37,7 @@ def predict():
     # Prediction
     results = model.predict(
         source=filepath,
+        imgsz = 224,
         verbose=False
     )
 
