@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pneumonia Detection System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+
+}
+
+.container{
+
+    width:420px;
+    background:rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    color:white;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
+
+}
+
+.container h1{
+
+    margin-bottom:10px;
+    font-size:30px;
+
+}
+
+.container p{
+
+    margin-bottom:25px;
+    color:#ddd;
+
+}
+
+.upload-box{
+
+    border:3px dashed #7dd3fc;
+
+    border-radius:15px;
+
+    padding:30px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.upload-box:hover{
+
+    background:rgba(255,255,255,.08);
+
+    transform:scale(1.02);
+
+}
+
+.upload-box img{
+
+    width:70px;
+    margin-bottom:15px;
+
+}
+
+.upload-box p{
+
+    color:white;
+    margin:0;
+
+}
+
+input[type=file]{
+
+    display:none;
+
+}
+
+.preview{
+
+    margin-top:20px;
+
+}
+
+.preview img{
+
+    width:220px;
+
+    border-radius:15px;
+
+    display:none;
+
+    margin:auto;
+
+    border:3px solid white;
+
+}
+
+button{
+
+    margin-top:25px;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#00c6ff;
+
+    background:linear-gradient(to right,#00c6ff,#0072ff);
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,114,255,.4);
+
+}
+
+.footer{
+
+    margin-top:20px;
+
+    font-size:13px;
+
+    color:#ddd;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🩺 Pneumonia Detection</h1>
+
+<p>Upload your Chest X-Ray Image</p>
+
+<form action="/predict"
+      method="POST"
+      enctype="multipart/form-data">
+
+<label class="upload-box" id="uploadBox">
+
+    <img
+        src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png"
+        id="uploadIcon">
+
+    <p id="uploadText">
+        <strong>Click Here</strong><br>
+        or Drag & Drop Image
+    </p>
+
+    <input
+        type="file"
+        name="image"
+        id="imageInput"
+        accept="image/*"
+        required>
+
+</label>
+
+<div class="preview">
+
+    <h3 id="selectedText" style="display:none;">
+        Selected Image
+    </h3>
+
+    <img id="previewImage">
+</div>
+
+<button type="submit">
+🔍 Predict
+</button>
+
+</form>
+
+<!-- <div class="footer">
+
+AI Powered Chest X-Ray Analysis
+
+</div> -->
+
+</div>
+
+<script>
+
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("previewImage");
+
+// const uploadBox = document.getElementById("uploadBox")
+const uploadIcon = document.getElementById("uploadIcon");
+const uploadText = document.getElementById("uploadText");
+const selectedText = document.getElementById("selectedText");
+
+imageInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (file) {
+
+        // Show preview
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+
+        // Hide upload icon and text
+        // uploadBox.style.display = "none";
+        uploadIcon.style.display = "none";
+        uploadText.style.display = "none";
+
+        // Show "Selected Image"
+        selectedText.style.display = "block";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+
+
+
+
